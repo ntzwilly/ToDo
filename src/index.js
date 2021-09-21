@@ -17,7 +17,7 @@ function elementGenerator(typeName, className, content, idName) {
   return element;
 }
 
-export const todoTasks = [
+const todoTasks = [
   {
     description: 'Read the last chapiter of Ruby book',
     completed: false,
@@ -57,19 +57,21 @@ enterIcon.classList.add('enter-icon');
 
 form.appendChild(enterIcon);
 
-export const todoList = elementGenerator('ul', 'to-do-list', null, null);
+const todoList = elementGenerator('ul', 'to-do-list', null, null);
 
-todoTasks.forEach((elem, i) => {
-  todoList.innerHTML += `<li class="task">
-                             <div class="to-do-div">
-                             <div>
-                             <input class="one-todo" type="checkbox" id="${i}">
-                             <form class="edit">
-                             </div>                             
-                             <input class="label" value='${todoTasks[i].description}'></input>
-                             </form>
-                             <img src="http://localhost:8080/3adb9cb42cd31f0448c7.svg" class="more"></div></li>`;
-});
+const displayToDos = () => {
+  todoTasks.forEach((elem, i) => {
+    todoList.innerHTML += `<li class="task">
+                               <div class="to-do-div">
+                               <div>
+                               <input class="one-todo" type="checkbox" id="${i}">
+                               <form class="edit">
+                               </div>                             
+                               <input class="label" value='${todoTasks[i].description}'></input>
+                               </form>
+                               <img src="http://localhost:8080/3adb9cb42cd31f0448c7.svg" class="more"></div></li>`;
+  });
+};
 
 const todoDiv = elementGenerator('div', 'to-do-div', null, null);
 
@@ -97,3 +99,7 @@ todo.appendChild(divClear);
 
 const toDoContainer = document.getElementById('todo-container');
 toDoContainer.appendChild(todo);
+
+window.addEventListener('load', () => {
+  displayToDos();
+});
