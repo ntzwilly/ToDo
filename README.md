@@ -38,7 +38,7 @@
 
 ## Authors
 
-👤 **Author**
+👤 **Ntazama Willy**
 
 - GitHub: [@ntzwilly](https://github.com/ntzwilly)
 - LinkedIn: [@ntazamawilly](https://linkedin.com/in/ntazama-willy-b676b7aa)

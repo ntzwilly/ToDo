@@ -3,7 +3,7 @@ import moreIcon from './more.svg';
 import Icon from './enter.svg';
 import recycle from './recycle.svg';
 
-function elementGenerator(typeName, className, content, idName) {
+const elementGenerator = (typeName, className, content, idName) => {
   const element = document.createElement(typeName);
   if (className) {
     element.className = className;
@@ -15,7 +15,7 @@ function elementGenerator(typeName, className, content, idName) {
     element.id = idName;
   }
   return element;
-}
+};
 
 const todoTasks = [
   {
