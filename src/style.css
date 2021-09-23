@@ -80,10 +80,11 @@ button:focus {
   width: 100%;
 }
 
-.to-do-div {
+.task {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   background-color: #fff;
   width: 100%;
   padding: 15px;
@@ -91,9 +92,8 @@ button:focus {
   border-bottom: 1px solid gainsboro;
 }
 
-.task {
+.flex {
   display: flex;
-  align-items: center;
 }
 
 .label {
@@ -107,6 +107,7 @@ button:focus {
 
 .one-todo {
   transform: scale(1.5);
+  align-self: center;
 }
 
 .div-clear {
