@@ -26,7 +26,7 @@
     1. git clone https://github.com/ntzwilly/ToDo.git
     2. cd ToDo
     3. git branch -r
-    4. git checkout list_structure
+    4. git checkout add-remove
 
 ### Install
 
