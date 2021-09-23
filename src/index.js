@@ -18,9 +18,10 @@ export const elementGenerator = (typeName, className, content, idName) => {
   return element;
 };
 
+// eslint-disable-next-line import/no-mutable-exports
 export let todoTasks = [
   {
-    description: 'Read the last chapiter of Ruby book',
+    description: 'Solve one coding challenge',
     completed: false,
     id: 0,
     checked: false,
@@ -38,7 +39,6 @@ export let todoTasks = [
     checked: false,
   },
 ];
-
 
 const todo = elementGenerator('div', 'container', null, null);
 const todoHeader = elementGenerator('div', 'title', null, null);
@@ -81,7 +81,7 @@ toDoContainer.appendChild(todo);
 window.addEventListener('load', () => {
   const result = localStorage.getItem('ToDo');
   if (result) {
-   todoTasks = JSON.parse(result);
+    todoTasks = JSON.parse(result);
   }
   display();
 });

@@ -1,10 +1,26 @@
 /* eslint-disable import/no-mutable-exports */
 import moreIcon from './more.svg';
 // eslint-disable-next-line import/no-cycle
-import { todoList, todoTasks, elementGenerator } from './index.js';
+import { todoList, todoTasks, elementGenerator } from './index';
 
 function savedList() {
   localStorage.setItem('ToDo', JSON.stringify(todoTasks));
+}
+
+function statusUpdate(item, input, oneTodo, todoTasks) {
+  if (item.checked) {
+    input.classList.add('line-through');
+  } else {
+    input.classList.remove('line-through');
+  }
+
+  oneTodo.addEventListener('change', () => {
+    const todo = todoTasks[item.id];
+    todo.checked = !item.checked;
+    todo.completed = !item.completed;
+    // eslint-disable-next-line no-use-before-define
+    display();
+  });
 }
 
 function listItem(elem) {
@@ -19,14 +35,15 @@ function listItem(elem) {
 
   input.setAttribute('name', elem.id);
 
+  const image = elementGenerator('img', 'more', null, null);
+  image.src = moreIcon;
+
   input.addEventListener('blur', (e) => {
     image.src = moreIcon;
     e.preventDefault();
   });
 
   input.value = elem.description;
-  const image = elementGenerator('img', 'more', null, null);
-  image.src = moreIcon;
 
   statusUpdate(elem, input, oneTodo, todoTasks);
 
@@ -49,19 +66,4 @@ export function display() {
     todoList.appendChild(item);
   });
   savedList();
-}
-
-function statusUpdate(item, input, oneTodo, todoTasks) {
-  if (item.checked) {
-    input.classList.add('line-through');
-  } else {
-    input.classList.remove('line-through');
-  }
-
-  oneTodo.addEventListener('change', () => {
-    const todo = todoTasks[item.id];
-    todo.checked = !item.checked;
-    todo.completed = !item.completed;
-    display();
-  });
 }
