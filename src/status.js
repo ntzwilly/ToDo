@@ -1,13 +1,18 @@
-/* eslint-disable import/no-mutable-exports */
-import moreIcon from './more.svg';
-// eslint-disable-next-line import/no-cycle
-import { todoList, todoTasks, elementGenerator } from './index';
-
-function savedList() {
-  localStorage.setItem('ToDo', JSON.stringify(todoTasks));
+export default function elementGenerator(typeName, className, content, idName) {
+  const element = document.createElement(typeName);
+  if (className) {
+    element.className = className;
+  }
+  if (content) {
+    element.textContent = content;
+  }
+  if (idName) {
+    element.id = idName;
+  }
+  return element;
 }
 
-function statusUpdate(item, input, oneTodo, todoTasks) {
+export function statusUpdate(item, input, oneTodo, todoTasks) {
   if (item.checked) {
     input.classList.add('line-through');
   } else {
@@ -18,52 +23,5 @@ function statusUpdate(item, input, oneTodo, todoTasks) {
     const todo = todoTasks[item.id];
     todo.checked = !item.checked;
     todo.completed = !item.completed;
-    // eslint-disable-next-line no-use-before-define
-    display();
   });
-}
-
-function listItem(elem) {
-  const list = elementGenerator('li', 'task draggable', null, null);
-  const flex = elementGenerator('div', 'flex', null, null);
-  const oneTodo = elementGenerator('input', 'one-todo', null, null);
-  oneTodo.type = 'checkbox';
-  oneTodo.checked = elem.checked;
-
-  const form = elementGenerator('form', 'edit', null, null);
-  const input = elementGenerator('input', 'label', null, null);
-
-  input.setAttribute('name', elem.id);
-
-  const image = elementGenerator('img', 'more', null, null);
-  image.src = moreIcon;
-
-  input.addEventListener('blur', (e) => {
-    image.src = moreIcon;
-    e.preventDefault();
-  });
-
-  input.value = elem.description;
-
-  statusUpdate(elem, input, oneTodo, todoTasks);
-
-  form.appendChild(input);
-  flex.appendChild(oneTodo);
-  flex.appendChild(form);
-  list.appendChild(flex);
-  list.appendChild(image);
-
-  todoList.appendChild(list);
-
-  return list;
-}
-
-/* eslint-disable import/prefer-default-export */
-export function display() {
-  todoList.innerHTML = '';
-  todoTasks.forEach((elem) => {
-    const item = listItem(elem);
-    todoList.appendChild(item);
-  });
-  savedList();
 }
