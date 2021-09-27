@@ -1,13 +1,7 @@
-export default function elementGenerator(typeName, className, content, idName) {
+export default function elementGenerator(typeName, className) {
   const element = document.createElement(typeName);
   if (className) {
     element.className = className;
-  }
-  if (content) {
-    element.textContent = content;
-  }
-  if (idName) {
-    element.id = idName;
   }
   return element;
 }

@@ -9,9 +9,9 @@ import {
   createTask, deleteTask, clearTasks, editTask,
 } from './crud';
 
-const todo = elementGenerator('div', 'container', null, null);
-const todoHeader = elementGenerator('div', 'title', null, null);
-const header = elementGenerator('div', 'to-do-title', null, null);
+const todo = elementGenerator('div', 'container');
+const todoHeader = elementGenerator('div', 'title');
+const header = elementGenerator('div', 'to-do-title');
 header.textContent = "Today's To Do";
 todoHeader.appendChild(header);
 
@@ -20,8 +20,8 @@ myRecycle.src = recycle;
 myRecycle.classList.add('recycle');
 todoHeader.appendChild(myRecycle);
 
-const form = elementGenerator('form', 'to-do', null, null);
-export const taskInput = elementGenerator('input', 'add-to-do', null, null);
+const form = elementGenerator('form', 'to-do');
+export const taskInput = elementGenerator('input', 'add-to-do');
 taskInput.placeholder = 'Add to your list...';
 form.appendChild(taskInput);
 
@@ -31,10 +31,10 @@ enterIcon.classList.add('enter-icon');
 
 form.appendChild(enterIcon);
 
-const todoList = elementGenerator('ul', 'to-do-list', null, null);
+const todoList = elementGenerator('ul', 'to-do-list');
 
-const divClear = elementGenerator('div', 'div-clear', null, null);
-export const btnClear = elementGenerator('button', 'clear', null, null);
+const divClear = elementGenerator('div', 'div-clear');
+export const btnClear = elementGenerator('button', 'clear');
 btnClear.type = 'button';
 btnClear.textContent = 'Clear All completed';
 divClear.appendChild(btnClear);
@@ -55,15 +55,15 @@ function display() {
   todoList.innerHTML = '';
 
   function listItem(elem) {
-    const list = elementGenerator('li', 'task', null, null);
-    const flex = elementGenerator('div', 'flex', null, null);
-    const oneTodo = elementGenerator('input', 'one-todo', null, null);
+    const list = elementGenerator('li', 'task');
+    const flex = elementGenerator('div', 'flex');
+    const oneTodo = elementGenerator('input', 'one-todo');
     oneTodo.type = 'checkbox';
     oneTodo.checked = elem.checked;
-    const form = elementGenerator('form', 'edit', null, null);
-    const image = elementGenerator('img', 'more', null, null);
+    const form = elementGenerator('form', 'edit');
+    const image = elementGenerator('img', 'more');
     image.src = moreIcon;
-    const input = elementGenerator('input', 'label', null, null);
+    const input = elementGenerator('input', 'label');
     input.setAttribute('name', elem.id);
     input.addEventListener('click', () => {
       image.src = deleteIcon;
@@ -97,10 +97,8 @@ function display() {
 
     statusUpdate(elem, input, oneTodo, todoTasks);
     form.appendChild(input);
-    flex.appendChild(oneTodo);
-    flex.appendChild(form);
-    list.appendChild(flex);
-    list.appendChild(image);
+    flex.append(oneTodo, form);
+    list.append(flex, image);
     todoList.appendChild(list);
     return list;
   }

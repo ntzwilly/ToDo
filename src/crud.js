@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import savedList, { todoTasks, taskInput, btnClear } from './index';
 
-export function createTask() {
+export const createTask = () => {
   const form = document.querySelector('.to-do');
 
   form.addEventListener('submit', () => {
@@ -18,7 +18,7 @@ export function createTask() {
   });
 }
 
-export function editTask(input, elem, form) {
+export const editTask = (input, elem, form) => {
   let newValue = '';
   input.setAttribute('name', elem.id);
   input.addEventListener('input', (e) => {
@@ -34,7 +34,7 @@ export function editTask(input, elem, form) {
   });
 }
 
-export function deleteTask(elt) {
+export const deleteTask = (elt) => {
   todoTasks.splice(elt, 1);
   for (let i = 0; i < todoTasks.length; i++) {
     todoTasks[i].id = i;
@@ -44,7 +44,7 @@ export function deleteTask(elt) {
   localStorage.setItem('ToDo', JSON.stringify(todoTasks));
 }
 
-export function clearTasks() {
+export const clearTasks = () => {
   btnClear.addEventListener('click', () => {
     const pendingTasks = todoTasks.filter((item) => item.checked !== true);
     for (let i = 0; i < pendingTasks.length; i += 1) {
