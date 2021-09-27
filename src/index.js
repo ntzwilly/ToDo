@@ -2,32 +2,12 @@ import './style.css';
 import moreIcon from './more.svg';
 import Icon from './enter.svg';
 import recycle from './recycle.svg';
+import deleteIcon from './delete.svg';
 import elementGenerator from './status';
-
-let todoTasks = [
-  {
-    description: 'Read the last chapiter of Ruby book',
-    completed: false,
-    id: 0,
-    checked: false,
-  },
-  {
-    description: 'Grab a cup of coffee',
-    completed: false,
-    id: 1,
-    checked: false,
-  },
-  {
-    description: 'Go to the marked',
-    completed: false,
-    id: 2,
-    checked: false,
-  },
-];
-
-const savedList = () => {
-  localStorage.setItem('ToDo', JSON.stringify(todoTasks));
-};
+// eslint-disable-next-line import/no-cycle
+import {
+  createTask, deleteTask, clearTasks, editTask,
+} from './crud';
 
 const todo = elementGenerator('div', 'container', null, null);
 const todoHeader = elementGenerator('div', 'title', null, null);
@@ -41,7 +21,7 @@ myRecycle.classList.add('recycle');
 todoHeader.appendChild(myRecycle);
 
 const form = elementGenerator('form', 'to-do', null, null);
-const taskInput = elementGenerator('input', 'add-to-do', null, null);
+export const taskInput = elementGenerator('input', 'add-to-do', null, null);
 taskInput.placeholder = 'Add to your list...';
 form.appendChild(taskInput);
 
@@ -54,7 +34,7 @@ form.appendChild(enterIcon);
 const todoList = elementGenerator('ul', 'to-do-list', null, null);
 
 const divClear = elementGenerator('div', 'div-clear', null, null);
-const btnClear = elementGenerator('button', 'clear', null, null);
+export const btnClear = elementGenerator('button', 'clear', null, null);
 btnClear.type = 'button';
 btnClear.textContent = 'Clear All completed';
 divClear.appendChild(btnClear);
@@ -67,6 +47,13 @@ todo.appendChild(divClear);
 const toDoContainer = document.getElementById('todo-container');
 toDoContainer.appendChild(todo);
 
+// eslint-disable-next-line import/no-mutable-exports
+export let todoTasks = [];
+
+export default function savedList() {
+  localStorage.setItem('ToDo', JSON.stringify(todoTasks));
+}
+
 function display() {
   todoList.innerHTML = '';
 
@@ -77,10 +64,19 @@ function display() {
     oneTodo.type = 'checkbox';
     oneTodo.checked = elem.checked;
     const form = elementGenerator('form', 'edit', null, null);
-    const input = elementGenerator('input', 'label', null, null);
-    input.setAttribute('name', elem.id);
     const image = elementGenerator('img', 'more', null, null);
     image.src = moreIcon;
+    const input = elementGenerator('input', 'label', null, null);
+    input.setAttribute('name', elem.id);
+    input.addEventListener('click', () => {
+      image.src = deleteIcon;
+      image.addEventListener('click', () => {
+        deleteTask(elem.id);
+        window.location.reload();
+      });
+    });
+
+    editTask(input, elem, form);
 
     input.addEventListener('blur', (e) => {
       image.src = moreIcon;
@@ -125,4 +121,7 @@ window.addEventListener('load', () => {
     todoTasks = JSON.parse(result);
   }
   display();
+  createTask();
+  clearTasks();
+  editTask();
 });
