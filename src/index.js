@@ -39,10 +39,7 @@ btnClear.type = 'button';
 btnClear.textContent = 'Clear All completed';
 divClear.appendChild(btnClear);
 
-todo.appendChild(todoHeader);
-todo.appendChild(form);
-todo.appendChild(todoList);
-todo.appendChild(divClear);
+todo.append(todoHeader, form, todoList, divClear);
 
 const toDoContainer = document.getElementById('todo-container');
 toDoContainer.appendChild(todo);

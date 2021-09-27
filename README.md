@@ -22,17 +22,18 @@
 
     NodeJS
 ### Setup
-
+  ```
     1. git clone https://github.com/ntzwilly/ToDo.git
-    2. cd ToDo
+    2. cd ToDo 
+  ```
 ### Install
-
+  ```
     npm install
-
+  ```
 ### Usage
-
+  ```
     npm start
-
+  ```
 ## Authors
 
 👤 **Ntazama Willy**

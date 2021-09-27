@@ -3,7 +3,6 @@ import savedList, { todoTasks, taskInput, btnClear } from './index';
 
 export function createTask() {
   const form = document.querySelector('.to-do');
-  const id = todoTasks.length;
 
   form.addEventListener('submit', () => {
     const newToDo = taskInput.value;
@@ -13,7 +12,6 @@ export function createTask() {
         completed: false,
         index: todoTasks.length + 1,
         checked: false,
-        id,
       });
       savedList();
     }
@@ -38,7 +36,7 @@ export function editTask(input, elem, form) {
 
 export function deleteTask(elt) {
   todoTasks.splice(elt, 1);
-  for (let i = 0; i < todoTasks.length; i += 1) {
+  for (let i = 0; i < todoTasks.length; i++) {
     todoTasks[i].id = i;
     todoTasks[i].index = i + 1;
   }
