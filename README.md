@@ -25,9 +25,6 @@
 
     1. git clone https://github.com/ntzwilly/ToDo.git
     2. cd ToDo
-    3. git branch -r
-    4. git checkout add-remove
-
 ### Install
 
     npm install
